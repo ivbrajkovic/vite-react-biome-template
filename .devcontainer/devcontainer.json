@@ -1,21 +1,30 @@
 {
-	"name": "vite-react-biome-template",
+	"name": "",
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
-
 	"features": {
 		"ghcr.io/devcontainers/features/common-utils:1": {},
 		"ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store:1": {}
 	},
-
 	"forwardPorts": [5173],
-
 	"customizations": {
 		"vscode": {
-			"extensions": ["biomejs.biome"]
+			"extensions": [
+				"biomejs.biome",
+				"dsznajder.es7-react-js-snippets",
+				"christian-kohler.path-intellisense",
+				"christian-kohler.npm-intellisense",
+				"streetsidesoftware.code-spell-checker",
+				"huibizhang.codesnap-plus",
+				"vunguyentuan.vscode-css-variables",
+				"mhutchie.git-graph",
+				"eamodio.gitlens",
+				"ecmel.vscode-html-css",
+				"bradgashler.htmltagwrap",
+				"chrisdias.promptboost",
+				"Gruntfuggly.todo-tree"
+			]
 		}
 	},
-
-	"postCreateCommand": "chmod +x .devcontainer/bootstrap.sh && chmod +x .devcontainer/scripts/*.sh && .devcontainer/bootstrap.sh",
-
+	// "postCreateCommand": "chmod +x .devcontainer/bootstrap.sh && chmod +x .devcontainer/scripts/*.sh && .devcontainer/bootstrap.sh",
 	"runArgs": ["--name", "vite-react-biome-template"]
 }
