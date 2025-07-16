@@ -1,0 +1,19 @@
+{
+	"name": "vite-react-biome-template",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:1": {},
+		"ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store:1": {}
+	},
+
+	"forwardPorts": [5173],
+
+	"customizations": {
+		"vscode": {
+			"extensions": ["biomejs.biome"]
+		}
+	},
+
+	"runArgs": ["--name", "vite-react-biome-template"]
+}
