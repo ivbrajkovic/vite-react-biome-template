@@ -10,7 +10,11 @@ if [ -f "package.json" ]; then
 
   if [ "$response" = "y" ] || [ "$response" = "Y" ]; then
     echo "♻️  Clearing project directory..."
-    find . -mindepth 1 -maxdepth 1 ! -name '.devcontainer' -exec rm -rf {} +
+    find . -mindepth 1 -maxdepth 1 \
+      ! -name '.devcontainer' \
+      ! -name '.git' \
+      -exec rm -rf {} +
+    echo "✅ Project directory cleared."
     echo "🔁 Continuing bootstrap after cleanup..."
   else
     echo "⏭️  Skipping bootstrap."
