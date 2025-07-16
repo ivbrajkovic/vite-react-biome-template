@@ -17,9 +17,9 @@ echo "⚠️  Git global user.name or user.email not set."
 read -rp "Enter Git user.name: " NEW_USERNAME
 read -rp "Enter Git user.email: " NEW_USEREMAIL
 
-git config --global user.name "$NEW_USERNAME"
-git config --global user.email "$NEW_USEREMAIL"
+git config user.name "$NEW_USERNAME"
+git config user.email "$NEW_USEREMAIL"
 
 echo "✅ Git global config set:"
-echo "  Name : $(git config --global user.name)"
-echo "  Email: $(git config --global user.email)"
+echo "  Name : $(git config user.name)"
+echo "  Email: $(git config user.email)"
