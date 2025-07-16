@@ -1,5 +1,3 @@
-// .devcontainer/scripts/clean-eslint.cjs
-// biome-ignore lint/style/useNodejsImportProtocol: This will be run in a Node.js environment.
 const fs = require("fs");
 
 const eslintConfigPath = "./eslint.config.js";

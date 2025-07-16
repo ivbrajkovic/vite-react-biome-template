@@ -1,4 +1,3 @@
-// .devcontainer/scripts/patch-vite-config.cjs
 const fs = require("fs");
 
 const VITE_CONFIG_PATH = "./vite.config.ts";

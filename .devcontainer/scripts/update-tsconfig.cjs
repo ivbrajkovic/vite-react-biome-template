@@ -1,5 +1,3 @@
-// biome-ignore lint/style/useNodejsImportProtocol: This will be run in a Node.js environment.
-// .devcontainer/scripts/update-tsconfig.cjs
 const fs = require("fs");
 const stripJsonComments = require("strip-json-comments").default;
 
@@ -7,7 +5,7 @@ const tsconfigPath = "./tsconfig.app.json";
 
 if (!fs.existsSync(tsconfigPath)) {
   console.log("⏭️ Skipping tsconfig update (file missing).");
-  return;
+  return
 }
 
 try {

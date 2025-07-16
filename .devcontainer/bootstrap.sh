@@ -24,9 +24,10 @@ fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+node "$SCRIPT_DIR/scripts/rename-devcontainer.cjs"
 "$SCRIPT_DIR/scripts/setup-git-user.sh"
 "$SCRIPT_DIR/scripts/scaffold-project.sh"
-node "$SCRIPT_DIR/scripts/clean-eslint.cjs"
+node "$SCRIPT_DIR/scripts/remove-eslint.cjs"
 "$SCRIPT_DIR/scripts/install-deps.sh"
 "$SCRIPT_DIR/scripts/copy-configs.sh"
 node "$SCRIPT_DIR/scripts/patch-vite-config.cjs"
