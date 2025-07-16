@@ -1,30 +1,34 @@
 #!/bin/sh
 set -e
 
-# Idempotency: skip if package.json exists
+# Check if project is already initialized
 if [ -f "package.json" ]; then
-  echo "⚠️ Project already initialized. Skipping."
-  exit 0
+  echo "⚠️  Project already initialized."
+
+  printf "❓ Do you want to reset the project (delete everything except .devcontainer)? [y/N]: "
+  read -r response
+
+  if [ "$response" = "y" ] || [ "$response" = "Y" ]; then
+    echo "♻️  Clearing project directory..."
+    find . -mindepth 1 -maxdepth 1 ! -name '.devcontainer' -exec rm -rf {} +
+    echo "🔁 Continuing bootstrap after cleanup..."
+  else
+    echo "⏭️  Skipping bootstrap."
+    exit 0
+  fi
 fi
 
-echo "🧱 Scaffolding Vite + React + TS app inside container volume..."
-
-# Scaffold the Vite project
-pnpm create vite@latest . --template react-ts
-
-# Install Biome
-echo "Installing Biome..."
-pnpm install -D @biomejs/biome
-
-# Get directory where this script is located
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-# Copy biome_config.json from the script directory to project root
-echo "Copying biome_config.json to project root..."
-cp "$SCRIPT_DIR/biome_config.json" .
+"$SCRIPT_DIR/scripts/setup-git-user.sh"
+"$SCRIPT_DIR/scripts/scaffold-project.sh"
+node "$SCRIPT_DIR/scripts/clean-eslint.cjs"
+"$SCRIPT_DIR/scripts/install-deps.sh"
+"$SCRIPT_DIR/scripts/copy-configs.sh"
+node "$SCRIPT_DIR/scripts/patch-vite-config.cjs"
+node "$SCRIPT_DIR/scripts/update-tsconfig.cjs"
 
-# Final install
-echo "Installing project dependencies..."
+echo "📦 Final dependency install..."
 pnpm install
 
 echo "✅ Setup complete. Happy coding!"
