@@ -5,7 +5,7 @@ echo "📦 Installing project dependencies..."
 pnpm install
 
 echo "📦 Installing Biome..."
-pnpm install -D @biomes/biome
+pnpm add -D -E @biomejs/biome
 
 echo "📦 Installing vite-tsconfig-paths..."
 pnpm add -D vite-tsconfig-paths

@@ -25,6 +25,6 @@
 			]
 		}
 	},
-	"postCreateCommand": "chmod +x .devcontainer/bootstrap.sh && chmod +x .devcontainer/scripts/*.sh && .devcontainer/bootstrap.sh",
+	"postCreateCommand": "chmod +x .devcontainer/bootstrap.sh && chmod +x .devcontainer/scripts/shell/*.sh && .devcontainer/bootstrap.sh",
 	"runArgs": ["--name", "vite-react-biome-template"]
 }

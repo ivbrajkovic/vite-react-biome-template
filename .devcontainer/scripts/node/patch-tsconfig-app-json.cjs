@@ -23,15 +23,21 @@ try {
 }
 
 // Update compiler options
+
 tsconfig.compilerOptions.allowUnreachableCode = true;
+console.log(`🔧 Setting allowUnreachableCode to true.`);
+
 tsconfig.compilerOptions.baseUrl = 'src';
+console.log(`🔧 Setting baseUrl to 'src'.`);
+
 tsconfig.compilerOptions.paths = tsconfig.compilerOptions.paths || {};
 tsconfig.compilerOptions.paths['@/*'] = ['*'];
+console.log(`🔧 Setting paths mapping for '@/'`);
 
 // Write updated JSON back to file
 try {
   fs.writeFileSync(filePath, JSON.stringify(tsconfig, null, 2));
-  console.log(`✅ Updated ${filePath} with baseUrl and allowUnreachableCode options.`);
+  console.log(`✅ Patching of ${filePath} completed successfully.`);
 } catch (error) {
   console.error(`❌ Failed to write ${filePath}:`, error.message);
   return;
