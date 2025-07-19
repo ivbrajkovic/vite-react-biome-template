@@ -2,4 +2,4 @@
 set -e
 
 echo "🧱 Scaffolding Vite + React + TS..."
-pnpm create vite@latest . --template react-ts
+pnpm create vite@latest . --template react-ts --ignore
