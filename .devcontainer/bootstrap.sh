@@ -8,7 +8,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 # Check if the project is already bootstrapped
-# "$SCRIPT_DIR/scripts/shell/check-bootstrap.sh" || exit 0;
+"$SCRIPT_DIR/scripts/shell/check-bootstrap.sh" || exit 0;
 
 echo "🔄 Starting project bootstrap..."
 
@@ -16,17 +16,17 @@ echo "🔄 Starting project bootstrap..."
 "$SCRIPT_DIR/scripts/shell/scaffold-project.sh"
 
 # Patch necessary files
-# node "$SCRIPT_DIR/scripts/node/patch-package-json.cjs"
-# node "$SCRIPT_DIR/scripts/node/patch-tsconfig-app-json.cjs"
-# node "$SCRIPT_DIR/scripts/node/patch-vite-config.cjs"
+node "$SCRIPT_DIR/scripts/node/patch-package-json.cjs"
+node "$SCRIPT_DIR/scripts/node/patch-tsconfig-app-json.cjs"
+node "$SCRIPT_DIR/scripts/node/patch-vite-config.cjs"
 
 # Copy configuration files
-# "$SCRIPT_DIR/scripts/shell/copy-configs.sh"
+"$SCRIPT_DIR/scripts/shell/copy-configs.sh"
 
 # Install dependencies
-# "$SCRIPT_DIR/scripts/shell/install-deps.sh"
+"$SCRIPT_DIR/scripts/shell/install-deps.sh"
 
 # Set up Git user configuration
-# "$SCRIPT_DIR/scripts/shell/setup-git-user.sh"
+"$SCRIPT_DIR/scripts/shell/setup-git-user.sh"
 
 echo "✅ Setup complete. Happy coding!"
