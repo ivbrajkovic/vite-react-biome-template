@@ -1,22 +1,23 @@
 const fs = require("fs");
+const path = require('path');
 
-const filePath = "./vite.config.ts";
+const viteConfigPath = path.join(process.cwd(), "vite.config.ts");
 
-if (!fs.existsSync(filePath)) {
-  console.log(`⏭️  Skipping patch (file ${filePath} missing).`);
+if (!fs.existsSync(viteConfigPath)) {
+  console.log(`⏭️  Skipping patch (file ${viteConfigPath} missing).`);
   return;
 }
 
-const raw = fs.readFileSync(filePath, 'utf-8');
+let viteConfig = fs.readFileSync(viteConfigPath, 'utf-8');
 
-if (raw.includes("vite-tsconfig-paths")) {
-  console.log(`⏭️  Skipping patch (file ${filePath} already patched).`);
+if (viteConfig.includes("vite-tsconfig-paths")) {
+  console.log(`⏭️  Skipping patch (file ${viteConfigPath} already patched).`);
   return;
 }
 
-console.log(`🔄 Patching ${filePath}...`);
+console.log(`🔄 Patching ${viteConfigPath}...`);
 
-let patchedCode = raw
+viteConfig = viteConfig
   .replace(
     /(import react from '@vitejs\/plugin-react';?)/, 
     `$1\nimport tsconfigPaths from 'vite-tsconfig-paths';`
@@ -27,15 +28,15 @@ let patchedCode = raw
   )
 console.log(`🔧 Added 'vite-tsconfig-paths' plugin`);
 
-patchedCode = patchedCode.replace(
+viteConfig = viteConfig.replace(
     /(defineConfig\(\s*\{)/, 
     `$1\n  server: { host: true },`
   );
 console.log(`🔧 Added 'server: { host: true }' to defineConfig`);
 
 try {
-  fs.writeFileSync(filePath, patchedCode);
-  console.log(`✅ Patching of ${filePath} completed successfully.`);
+  fs.writeFileSync(viteConfigPath, viteConfig);
+  console.log(`✅ Patching of ${viteConfigPath} completed successfully.`);
 } catch (error) {
-  console.error(`❌ Failed to write ${filePath}:`, error.message);
+  console.error(`❌ Failed to write ${viteConfigPath}:`, error.message);
 }

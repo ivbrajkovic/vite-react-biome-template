@@ -1,16 +1,17 @@
 const fs = require('node:fs')
+const path = require('path');
 
-const filePath = 'tsconfig.app.json'
+const tsconfigPath =  path.join(process.cwd(), 'tsconfig.app.json');
 
-if (!fs.existsSync(filePath)) {
-  console.log(`⏭️  Skipping patch (file ${filePath} missing).`);
+if (!fs.existsSync(tsconfigPath)) {
+  console.log(`⏭️  Skipping patch (file ${tsconfigPath} missing).`);
   return;
 }
 
-console.log(`🔄 Patching ${filePath}...`);
+console.log(`🔄 Patching ${tsconfigPath}...`);
 
 // Read and clean JSON file
-const raw = fs.readFileSync(filePath, 'utf-8');
+const raw = fs.readFileSync(tsconfigPath, 'utf-8');
 const cleanJson = raw.replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '').trim();
 
 // Parse JSON safely
@@ -18,7 +19,7 @@ let tsconfig;
 try {
   tsconfig = JSON.parse(cleanJson);
 } catch (error) {
-  console.error(`❌ Failed to parse JSON in ${filePath}:`, error.message);
+  console.error(`❌ Failed to parse JSON in ${tsconfigPath}:`, error.message);
   return;
 }
 
@@ -36,9 +37,9 @@ console.log(`🔧 Setting paths mapping for '@/'`);
 
 // Write updated JSON back to file
 try {
-  fs.writeFileSync(filePath, JSON.stringify(tsconfig, null, 2));
-  console.log(`✅ Patching of ${filePath} completed successfully.`);
+  fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2));
+  console.log(`✅ Patching of ${tsconfigPath} completed successfully.`);
 } catch (error) {
-  console.error(`❌ Failed to write ${filePath}:`, error.message);
+  console.error(`❌ Failed to write ${tsconfigPath}:`, error.message);
   return;
 }

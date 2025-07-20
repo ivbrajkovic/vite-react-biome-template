@@ -1,21 +1,20 @@
 const fs = require('node:fs')
+const path = require('path');
 
-const filePath = 'package.json'
+const packageJsonPath = path.join(process.cwd(), 'package.json');
 
-if (!fs.existsSync(filePath)) {
-  console.log(`⏭️  Skipping patch (file ${filePath} missing).`);
+if (!fs.existsSync(packageJsonPath)) {
+  console.log(`⏭️  Skipping patch (file ${packageJsonPath} missing).`);
   return;
 }
 
-console.log(`🔄 Patching ${filePath}...`);
-
-const raw = fs.readFileSync(filePath, 'utf-8');
+console.log(`🔄 Patching ${packageJsonPath}...`);
 
 let packageJson;
 try {
-  packageJson = JSON.parse(raw);
+  packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'));
 } catch (error) {
-  console.error(`❌ Failed to parse JSON in ${filePath}:`, error.message);
+  console.error(`❌ Failed to parse JSON in ${packageJsonPath}:`, error.message);
   return;
 }
 
@@ -46,8 +45,8 @@ eslintDeps.forEach(dep => {
 
 // Write updated JSON back to file
 try {
-  fs.writeFileSync(filePath, JSON.stringify(packageJson, null, 2));
-  console.log(`✅ Patching of ${filePath} completed successfully.`);
+  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+  console.log(`✅ Patching of ${packageJsonPath} completed successfully.`);
 } catch (error) {
-  console.error(`❌ Failed to write ${filePath}:`, error.message);
+  console.error(`❌ Failed to write ${packageJsonPath}:`, error.message);
 }

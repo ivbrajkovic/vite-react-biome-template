@@ -20,6 +20,9 @@ node "$SCRIPT_DIR/scripts/node/patch-package-json.cjs"
 node "$SCRIPT_DIR/scripts/node/patch-tsconfig-app-json.cjs"
 node "$SCRIPT_DIR/scripts/node/patch-vite-config.cjs"
 
+# Remove unnecessary files
+"$SCRIPT_DIR/scripts/shell/remove-unnecessary-files.sh"
+
 # Copy configuration files
 "$SCRIPT_DIR/scripts/shell/copy-configs.sh"
 
